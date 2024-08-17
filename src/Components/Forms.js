@@ -1,7 +1,8 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
+import { Link,  useNavigate } from "react-router-dom";
 
 
 function Forms({ addMovie }) {
@@ -9,6 +10,7 @@ function Forms({ addMovie }) {
   const [desc, setDescription] = useState("");
   const [Url, setPosterUrl] = useState("");
   const [rating, setRating] = useState(0);
+  const navigate = useNavigate();
 
   const Add = (e) => {
     e.preventDefault();
@@ -19,18 +21,20 @@ function Forms({ addMovie }) {
   
 
     const newMovie = {
-      tit,
-      desc,
-      Url,
-      rating,
+      title: tit,
+      description: desc,
+      posterUrl: Url,
+      rating: rating,
     };
 
     addMovie(newMovie);
-
+  
     setTitle("");
     setDescription("");
     setPosterUrl("");
     setRating("");
+
+  navigate('/')
   };
   return (
     <div>
@@ -75,9 +79,14 @@ function Forms({ addMovie }) {
           />
           <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <button variant="primary" type="submit">
           Save
-        </Button>
+        </button>
+       
+         
+        <Link to={'/'}> <button variant="secondary" className="ms-2">
+            Return
+          </button></Link>
       </Form>
     </div>
   );
